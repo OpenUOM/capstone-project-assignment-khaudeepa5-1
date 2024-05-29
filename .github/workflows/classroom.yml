@@ -1,5 +1,6 @@
 name: Autograding Tests
 'on':
+- push
 - workflow_dispatch
 - repository_dispatch
 permissions:
@@ -13,9 +14,13 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
     - name: Backend List Teachers
       id: backend-list-teachers
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Backend List Teachers
         setup-command: npm install
@@ -24,7 +29,7 @@ jobs:
         max-score: 10
     - name: Backend Add Teacher
       id: backend-add-teacher
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Backend Add Teacher
         setup-command: npm install
@@ -33,7 +38,7 @@ jobs:
         max-score: 10
     - name: Backend Edit Teacher
       id: backend-edit-teacher
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Backend Edit Teacher
         setup-command: npm install
@@ -42,7 +47,7 @@ jobs:
         max-score: 10
     - name: Backend Delete Teacher
       id: backend-delete-teacher
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Backend Delete Teacher
         setup-command: npm install
@@ -51,7 +56,7 @@ jobs:
         max-score: 10
     - name: Backend List Students
       id: backend-list-students
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Backend List Students
         setup-command: npm install
@@ -60,7 +65,7 @@ jobs:
         max-score: 10
     - name: Backend Add Student
       id: backend-add-student
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Backend Add Student
         setup-command: npm install
@@ -69,7 +74,7 @@ jobs:
         max-score: 10
     - name: Backend Edit Student
       id: backend-edit-student
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Backend Edit Student
         setup-command: npm install
@@ -78,7 +83,7 @@ jobs:
         max-score: 10
     - name: Backend Delete Student
       id: backend-delete-student
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Backend Delete Student
         setup-command: npm install
@@ -87,7 +92,7 @@ jobs:
         max-score: 10
     - name: Dummy Test
       id: dummy-test
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Dummy Test
         setup-command: npm install
@@ -95,7 +100,7 @@ jobs:
         timeout: 10
     - name: Frontend Add Student
       id: frontend-add-student
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Frontend Add Student
         setup-command: npm install
@@ -104,7 +109,7 @@ jobs:
         max-score: 10
     - name: Frontend Delete Student
       id: frontend-delete-student
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Frontend Delete Student
         setup-command: npm install
@@ -113,7 +118,7 @@ jobs:
         max-score: 10
     - name: Frontend Edit Student
       id: frontend-edit-student
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Frontend Edit Student
         setup-command: npm install
@@ -122,7 +127,7 @@ jobs:
         max-score: 10
     - name: Frontend Search Student
       id: frontend-search-student
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Frontend Search Student
         setup-command: npm install
@@ -131,7 +136,7 @@ jobs:
         max-score: 10
     - name: Frontend Add Teacher
       id: frontend-add-teacher
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Frontend Add Teacher
         setup-command: npm install
@@ -140,7 +145,7 @@ jobs:
         max-score: 10
     - name: Frontend Delete Teacher
       id: frontend-delete-teacher
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Frontend Delete Teacher
         setup-command: npm install
@@ -149,7 +154,7 @@ jobs:
         max-score: 10
     - name: Frontend Edit Teacher
       id: frontend-edit-teacher
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Frontend Edit Teacher
         setup-command: npm install
@@ -158,7 +163,7 @@ jobs:
         max-score: 10
     - name: Frontend Search Teacher
       id: frontend-search-teacher
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: education/autograding-command-grader@v1
       with:
         test-name: Frontend Search Teacher
         setup-command: npm install
@@ -166,7 +171,7 @@ jobs:
         timeout: 10
         max-score: 10
     - name: Autograding Reporter
-      uses: classroom-resources/autograding-grading-reporter@v1
+      uses: education/autograding-grading-reporter@v1
       env:
         BACKEND-LIST-TEACHERS_RESULTS: "${{steps.backend-list-teachers.outputs.result}}"
         BACKEND-ADD-TEACHER_RESULTS: "${{steps.backend-add-teacher.outputs.result}}"
